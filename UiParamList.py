@@ -121,7 +121,7 @@ def initializationParam8():
     param.listVisibility1 = True
     param.numOfLineEditListenerList1 = 1
     param.listVisibility2 = True
-    param.numOfLineEditListenerList2 = 3
+    param.numOfLineEditListenerList2 = 1
     param.needList1 = True
     param.needList2 = True
     param.needNum1 = True

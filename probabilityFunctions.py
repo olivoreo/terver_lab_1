@@ -46,9 +46,7 @@ def task5(km, nm, n, m):
     for i in range(m):
         p = km[i]/all_elements
         q = 1 - p
-        P = 0
-        for j in range(n):
-            P += combWithoutRep(n, j) * (p**j) * (q**(n-j))
+        P = combWithoutRep(n, nm[i]) * (p**nm[i]) * (q**(n-nm[i]))
         res += "P" + str(i) + " = " + str(P) + "; "
 
     return res

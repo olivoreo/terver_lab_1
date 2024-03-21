@@ -136,20 +136,6 @@ class Ui_MainWindow(object):
                 getIntFromLineEdit(self.Input_LineEdit1)
             )
         )
-        self.Input_LineEdit3.textChanged.connect(
-            lambda: self.lineEditListener(
-                self.Function_ComboBox.currentIndex(),
-                3,
-                getIntFromLineEdit(self.Input_LineEdit3)
-            )
-        )
-        self.Input_LineEdit4.textChanged.connect(
-            lambda: self.lineEditListener(
-                self.Function_ComboBox.currentIndex(),
-                4,
-                getIntFromLineEdit(self.Input_LineEdit4)
-            )
-        )
 
         self.Calculate_Button.clicked.connect(lambda: self.calculateResult(self.Function_ComboBox.currentIndex()))
 
@@ -249,11 +235,7 @@ class Ui_MainWindow(object):
         if (param.listVisibility1 and param.numOfLineEditListenerList1 == numLineEdit):
             num = min(param.maxLengthOfList1, number)
             self.myListWidgetClass1.setNumOfListElements(num)
-            self.Input_LineEdit3.setText(str(num))
-
-        if (param.listVisibility2 and param.numOfLineEditListenerList2 == numLineEdit):
-            num = min(param.maxLengthOfList2, number)
-            self.myListWidgetClass2.setNumOfListElements(num)
+            self.myListWidgetClass2.setNumOfListElements(num+num)
 
     def setTabOder(self, MainWindow):
         scrollArea1 = self.myListWidgetClass1.scrollArea
