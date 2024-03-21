@@ -34,16 +34,21 @@ def permutationsWithRep(mList):
         value = value // factorial(m)
     return int(value)
 
-def task2(n,m):
-    if n>=m:
-        return round(1/combWithoutRep(n,m),17)
-    else:
-        return -1
+def task1(k, l, r, S):
+    if (k <= l <= r <= S):
+        value = (combWithoutRep(l, S) * combWithoutRep(k-l, r-S))/(combWithoutRep(k, r))
+        return value
+    return -1
 
-def task4(nList):
-    value = permutationsWithRep(nList)
-    value = value / placeWithRep(len(nList), sum(nList))
-    return value
+def task5(km, nm, n, m):
+    res = ""
+    all_elements = sum(km)
+    for i in range(m):
+        p = km[i]/all_elements
+        q = 1 - p
+        P = 0
+        for j in range(n):
+            P += combWithoutRep(n, j) * (p**j) * (q**(n-j))
+        res += "P" + str(i) + " = " + str(P) + "; "
 
-def task5():
-    return
+    return res

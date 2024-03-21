@@ -1,10 +1,14 @@
 class UiParam:
+    labelText0 = ""
     labelText1 = ""
     labelText2 = ""
     labelText3 = ""
+    labelText4 = ""
+    lineEditVisibility0 = False
     lineEditVisibility1 = False
     lineEditVisibility2 = False
     lineEditVisibility3 = False
+    lineEditVisibility4 = False
     labelListText1 = ""
     labelListText2 = ""
     listVisibility1 = False
@@ -13,12 +17,13 @@ class UiParam:
     numOfLineEditListenerList2 = 0
     nameElementList1 = ""
     nameElementList2 = ""
-    maxLengthOfList1 = 30
-    maxLengthOfList2 = 30
+    maxLengthOfList1 = 100
+    maxLengthOfList2 = 100
     pictureName = ""
     needNum1 = False
     needNum2 = False
     needNum3 = False
+    needNum4 = False
     needList1 = False
     needList2 = False
     function = None

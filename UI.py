@@ -19,17 +19,18 @@ import UiParamList
 class Ui_MainWindow(object):
     photoWidth = 400
     maxLengthOfList = 30
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("Lab_1 Тютюнов, Лукьяненко, Букин")
         MainWindow.resize(412, 483)
-        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)#Главный виджет
+        self.centralwidget = QtWidgets.QWidget(parent=MainWindow)  # Главный виджет
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutMain = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayoutMain.setObjectName("verticalLayoutMain")
 
         self.Function_ComboBox = QtWidgets.QComboBox(parent=self.centralwidget)
         self.Function_ComboBox.setObjectName("Function_ComboBox")
-        for i in range(9):
+        for i in range(8):
             self.Function_ComboBox.addItem("")
         self.verticalLayoutMain.addWidget(self.Function_ComboBox)
 
@@ -38,25 +39,36 @@ class Ui_MainWindow(object):
         self.NumberInput_FormLayout.setSpacing(7)
         self.NumberInput_FormLayout.setObjectName("NumberInput_FormLayout")
 
+        self.Input_Label0 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.Input_Label0.setObjectName("Input_Label0")
+
         self.Input_Label1 = QtWidgets.QLabel(parent=self.centralwidget)
         self.Input_Label1.setObjectName("Input_Label1")
         self.Input_Label2 = QtWidgets.QLabel(parent=self.centralwidget)
         self.Input_Label2.setObjectName("Input_Label2")
         self.Input_Label3 = QtWidgets.QLabel(parent=self.centralwidget)
         self.Input_Label3.setObjectName("Input_Label3")
+        self.Input_Label4 = QtWidgets.QLabel(parent=self.centralwidget)
+        self.Input_Label4.setObjectName("Input_Label4")
         self.Input_LineEdit1 = QtWidgets.QLineEdit(parent=self.centralwidget)
         self.Input_LineEdit1.setObjectName("Input_LineEdit1")
         self.Input_LineEdit2 = QtWidgets.QLineEdit(parent=self.centralwidget)
         self.Input_LineEdit2.setObjectName("Input_LineEdit2")
         self.Input_LineEdit3 = QtWidgets.QLineEdit(parent=self.centralwidget)
         self.Input_LineEdit3.setObjectName("Input_LineEdit3")
+        self.Input_LineEdit4 = QtWidgets.QLineEdit(parent=self.centralwidget)
+        self.Input_LineEdit4.setObjectName("Input_LineEdit4")
 
-        self.NumberInput_FormLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label1)
-        self.NumberInput_FormLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit1)
-        self.NumberInput_FormLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label2)
-        self.NumberInput_FormLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit2)
-        self.NumberInput_FormLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label3)
-        self.NumberInput_FormLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit3)
+        self.NumberInput_FormLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label1)
+        self.NumberInput_FormLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit1)
+        self.NumberInput_FormLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label2)
+        self.NumberInput_FormLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit2)
+        self.NumberInput_FormLayout.setWidget(3, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label3)
+        self.NumberInput_FormLayout.setWidget(3, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit3)
+        self.NumberInput_FormLayout.setWidget(4, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label4)
+        self.NumberInput_FormLayout.setWidget(4, QtWidgets.QFormLayout.ItemRole.FieldRole, self.Input_LineEdit4)
+
+        self.NumberInput_FormLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.Input_Label0)
 
         self.verticalLayoutMain.addLayout(self.NumberInput_FormLayout)
 
@@ -113,8 +125,10 @@ class Ui_MainWindow(object):
         self.setValidators()
         self.setListeners()
         self.changeMod(self.Function_ComboBox.currentIndex(), self.Function_ComboBox.currentText())
+
     def setListeners(self):
-        self.Function_ComboBox.currentIndexChanged.connect(lambda: self.changeMod(self.Function_ComboBox.currentIndex(), self.Function_ComboBox.currentText()))
+        self.Function_ComboBox.currentIndexChanged.connect(
+            lambda: self.changeMod(self.Function_ComboBox.currentIndex(), self.Function_ComboBox.currentText()))
         self.Input_LineEdit1.textChanged.connect(
             lambda: self.lineEditListener(
                 self.Function_ComboBox.currentIndex(),
@@ -122,31 +136,39 @@ class Ui_MainWindow(object):
                 getIntFromLineEdit(self.Input_LineEdit1)
             )
         )
-        self.Input_LineEdit2.textChanged.connect(
-            lambda: self.lineEditListener(
-                self.Function_ComboBox.currentIndex(),
-                2,
-                getIntFromLineEdit(self.Input_LineEdit2)
-            )
-        )
-        self.Input_LineEdit2.textChanged.connect(
+        self.Input_LineEdit3.textChanged.connect(
             lambda: self.lineEditListener(
                 self.Function_ComboBox.currentIndex(),
                 3,
                 getIntFromLineEdit(self.Input_LineEdit3)
             )
         )
+        self.Input_LineEdit4.textChanged.connect(
+            lambda: self.lineEditListener(
+                self.Function_ComboBox.currentIndex(),
+                4,
+                getIntFromLineEdit(self.Input_LineEdit4)
+            )
+        )
+
         self.Calculate_Button.clicked.connect(lambda: self.calculateResult(self.Function_ComboBox.currentIndex()))
+
     def setValidators(self):
         setValidator(self.Input_LineEdit1)
         setValidator(self.Input_LineEdit2)
         setValidator(self.Input_LineEdit3)
+        setValidator(self.Input_LineEdit4)
+
     def changeMod(self, index, text):
-        #проверка на диапазон
+        # проверка на диапазон
         if index < 0 or index >= len(self.paramList):
             print("Выход за пределы массивы параметров!")
             return
-        param = self.paramList[index] #параметры для текущей формулы
+        param = self.paramList[index]  # параметры для текущей формулы
+
+        self.Input_Label0.setVisible(param.lineEditVisibility0)
+        if param.lineEditVisibility0:
+            self.Input_Label0.setText(param.labelText0)
 
         self.Input_Label1.setVisible(param.lineEditVisibility1)
         self.Input_LineEdit1.setVisible(param.lineEditVisibility1)
@@ -162,6 +184,11 @@ class Ui_MainWindow(object):
         self.Input_LineEdit3.setVisible(param.lineEditVisibility3)
         if param.lineEditVisibility3:
             self.Input_Label3.setText(param.labelText3)
+
+        self.Input_Label4.setVisible(param.lineEditVisibility4)
+        self.Input_LineEdit4.setVisible(param.lineEditVisibility4)
+        if param.lineEditVisibility4:
+            self.Input_Label4.setText(param.labelText4)
 
         self.myListWidgetClass1.scrollArea.setVisible(param.listVisibility1)
         self.Scroll_Label1.setVisible(param.listVisibility1)
@@ -179,6 +206,7 @@ class Ui_MainWindow(object):
 
         pixmap = QPixmap(param.pictureName + ".png").scaledToWidth(self.photoWidth)
         self.Photo_Label.setPixmap(pixmap)
+
     def calculateResult(self, numOfOperation):
         # проверка на диапазон
         if numOfOperation < 0 or numOfOperation >= len(self.paramList):
@@ -193,18 +221,24 @@ class Ui_MainWindow(object):
                 values.num2 = getIntFromLineEdit(self.Input_LineEdit2)
             if param.needNum3:
                 values.num3 = getIntFromLineEdit(self.Input_LineEdit3)
+            if param.needNum4:
+                values.num4 = getIntFromLineEdit(self.Input_LineEdit4)
             if param.needList1:
                 values.list1 = self.myListWidgetClass1.getList()
             if param.needList2:
                 values.list2 = self.myListWidgetClass2.getList()
             res = param.function(values)
-            if res < 0:
-                text = "Некорректный ввод!"
+            if type(res) == int:
+                if res < 0:
+                    text = "Некорректный ввод!"
+                else:
+                    text = "Результат: " + str(res)
             else:
-                text = "Результат: "+str(res)
+                text = "Результат: " + res
         except:
             text = "Невозможно посчитать значение"
         self.Result_Label.setText(text)
+
     def lineEditListener(self, currentFunctionIndex, numLineEdit, number):
         # проверка на диапазон
         if currentFunctionIndex < 0 or currentFunctionIndex >= len(self.paramList):
@@ -215,10 +249,12 @@ class Ui_MainWindow(object):
         if (param.listVisibility1 and param.numOfLineEditListenerList1 == numLineEdit):
             num = min(param.maxLengthOfList1, number)
             self.myListWidgetClass1.setNumOfListElements(num)
+            self.Input_LineEdit3.setText(str(num))
 
         if (param.listVisibility2 and param.numOfLineEditListenerList2 == numLineEdit):
             num = min(param.maxLengthOfList2, number)
             self.myListWidgetClass2.setNumOfListElements(num)
+
     def setTabOder(self, MainWindow):
         scrollArea1 = self.myListWidgetClass1.scrollArea
         scrollArea2 = self.myListWidgetClass2.scrollArea
@@ -228,6 +264,7 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.Input_LineEdit3, scrollArea1)
         MainWindow.setTabOrder(scrollArea1, scrollArea2)
         MainWindow.setTabOrder(scrollArea2, self.Calculate_Button)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Lab_1 Тютюнов, Лукьяненко, Букин"))
@@ -238,13 +275,14 @@ class Ui_MainWindow(object):
         self.Function_ComboBox.setItemText(3, _translate("MainWindow", "Сочетание с повторениями"))
         self.Function_ComboBox.setItemText(4, _translate("MainWindow", "Размещение с повторениями"))
         self.Function_ComboBox.setItemText(5, _translate("MainWindow", "Перестановка с повторениями"))
-        self.Function_ComboBox.setItemText(6, _translate("MainWindow", "Задача №2"))
-        self.Function_ComboBox.setItemText(7, _translate("MainWindow", "Задача №4"))
-        self.Function_ComboBox.setItemText(8, _translate("MainWindow", "Задача №5"))
+        self.Function_ComboBox.setItemText(6, _translate("MainWindow", "Задача №1"))
+        self.Function_ComboBox.setItemText(7, _translate("MainWindow", "Задача №5"))
 
+        self.Input_Label0.setText(_translate("MainWindow", "Input_Label0"))
         self.Input_Label1.setText(_translate("MainWindow", "Input_Label1"))
         self.Input_Label2.setText(_translate("MainWindow", "Input_Label2"))
-        self.Input_Label3.setText(_translate("MainWindow", "Input_Label2"))
+        self.Input_Label3.setText(_translate("MainWindow", "Input_Label3"))
+        self.Input_Label3.setText(_translate("MainWindow", "Input_Label4"))
         self.Scroll_Label1.setText(_translate("MainWindow", "Scroll_Label1"))
         self.Scroll_Label2.setText(_translate("MainWindow", "Scroll_Label2"))
 
