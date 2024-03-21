@@ -35,7 +35,7 @@ def permutationsWithRep(mList):
     return int(value)
 
 def task1(k, l, r, S):
-    if (k <= l <= r <= S):
+    if (k >= l >= r >= S):
         value = (combWithoutRep(l, S) * combWithoutRep(k-l, r-S))/(combWithoutRep(k, r))
         return value
     return -1

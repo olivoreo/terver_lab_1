@@ -214,13 +214,10 @@ class Ui_MainWindow(object):
             if param.needList2:
                 values.list2 = self.myListWidgetClass2.getList()
             res = param.function(values)
-            if type(res) == int:
-                if res < 0:
-                    text = "Некорректный ввод!"
-                else:
-                    text = "Результат: " + str(res)
+            if int(res) < 0:
+                text = "Некорректный ввод!"
             else:
-                text = "Результат: " + res
+                text = "Результат: " + str(res)
         except:
             text = "Невозможно посчитать значение"
         self.Result_Label.setText(text)
