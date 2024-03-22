@@ -10,7 +10,6 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 import UiParamList
 from NaturalNumberValidator import setValidator
 from PyQt6.QtGui import QPixmap
-from MyListWidgetClass import MyListWidgetClass
 from myQTFunctions import getIntFromLineEdit
 from UiValues import UiValues
 import UiParamList
@@ -30,7 +29,7 @@ class Ui_MainWindow(object):
 
         self.Function_ComboBox = QtWidgets.QComboBox(parent=self.centralwidget)
         self.Function_ComboBox.setObjectName("Function_ComboBox")
-        for i in range(8):
+        for i in range(7):
             self.Function_ComboBox.addItem("")
         self.verticalLayoutMain.addWidget(self.Function_ComboBox)
 
@@ -72,28 +71,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayoutMain.addLayout(self.NumberInput_FormLayout)
 
-        self.Scroll_BoxLayout = QtWidgets.QVBoxLayout()
-        self.Scroll_BoxLayout.setContentsMargins(10, 10, 10, 10)
-        self.Scroll_BoxLayout.setObjectName("Scroll_BoxLayout")
-
-        self.Scroll_Label1 = QtWidgets.QLabel(parent=self.centralwidget)
-        self.Scroll_Label1.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
-        self.Scroll_Label1.setObjectName("Scroll_Label1")
-        self.Scroll_BoxLayout.addWidget(self.Scroll_Label1)
-
-        self.myListWidgetClass1 = MyListWidgetClass(self.centralwidget)
-        self.Scroll_BoxLayout.addWidget(self.myListWidgetClass1.scrollArea)
-
-        self.Scroll_Label2 = QtWidgets.QLabel(parent=self.centralwidget)
-        self.Scroll_Label2.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
-        self.Scroll_Label2.setObjectName("Scroll_Label2")
-        self.Scroll_BoxLayout.addWidget(self.Scroll_Label2)
-
-        self.myListWidgetClass2 = MyListWidgetClass(self.centralwidget)
-        self.Scroll_BoxLayout.addWidget(self.myListWidgetClass2.scrollArea)
-
-        self.verticalLayoutMain.addLayout(self.Scroll_BoxLayout)
-
         self.Result_Label = QtWidgets.QLabel(parent=self.centralwidget)
         self.Result_Label.setObjectName("Result_Label")
         self.verticalLayoutMain.addWidget(self.Result_Label)
@@ -129,13 +106,6 @@ class Ui_MainWindow(object):
     def setListeners(self):
         self.Function_ComboBox.currentIndexChanged.connect(
             lambda: self.changeMod(self.Function_ComboBox.currentIndex(), self.Function_ComboBox.currentText()))
-        self.Input_LineEdit1.textChanged.connect(
-            lambda: self.lineEditListener(
-                self.Function_ComboBox.currentIndex(),
-                1,
-                getIntFromLineEdit(self.Input_LineEdit1)
-            )
-        )
 
         self.Calculate_Button.clicked.connect(lambda: self.calculateResult(self.Function_ComboBox.currentIndex()))
 
@@ -176,20 +146,6 @@ class Ui_MainWindow(object):
         if param.lineEditVisibility4:
             self.Input_Label4.setText(param.labelText4)
 
-        self.myListWidgetClass1.scrollArea.setVisible(param.listVisibility1)
-        self.Scroll_Label1.setVisible(param.listVisibility1)
-        if param.listVisibility1:
-            self.Scroll_Label1.setText(param.labelListText1)
-            self.myListWidgetClass1.nameElement = param.nameElementList1
-            self.myListWidgetClass1.setNumOfListElements(0)
-
-        self.myListWidgetClass2.scrollArea.setVisible(param.listVisibility2)
-        self.Scroll_Label2.setVisible(param.listVisibility2)
-        if param.listVisibility2:
-            self.Scroll_Label2.setText(param.labelListText2)
-            self.myListWidgetClass2.nameElement = param.nameElementList2
-            self.myListWidgetClass2.setNumOfListElements(0)
-
         pixmap = QPixmap(param.pictureName + ".png").scaledToWidth(self.photoWidth)
         self.Photo_Label.setPixmap(pixmap)
 
@@ -222,27 +178,11 @@ class Ui_MainWindow(object):
             text = "Невозможно посчитать значение"
         self.Result_Label.setText(text)
 
-    def lineEditListener(self, currentFunctionIndex, numLineEdit, number):
-        # проверка на диапазон
-        if currentFunctionIndex < 0 or currentFunctionIndex >= len(self.paramList):
-            print("Выход за пределы массива параметров!")
-            return
-        param = self.paramList[currentFunctionIndex]  # параметры для текущей формулы
-
-        if (param.listVisibility1 and param.numOfLineEditListenerList1 == numLineEdit):
-            num = min(param.maxLengthOfList1, number)
-            self.myListWidgetClass1.setNumOfListElements(num)
-            self.myListWidgetClass2.setNumOfListElements(num+num)
-
     def setTabOder(self, MainWindow):
-        scrollArea1 = self.myListWidgetClass1.scrollArea
-        scrollArea2 = self.myListWidgetClass2.scrollArea
         MainWindow.setTabOrder(self.Function_ComboBox, self.Input_LineEdit1)
         MainWindow.setTabOrder(self.Input_LineEdit1, self.Input_LineEdit2)
         MainWindow.setTabOrder(self.Input_LineEdit2, self.Input_LineEdit3)
-        MainWindow.setTabOrder(self.Input_LineEdit3, scrollArea1)
-        MainWindow.setTabOrder(scrollArea1, scrollArea2)
-        MainWindow.setTabOrder(scrollArea2, self.Calculate_Button)
+        MainWindow.setTabOrder(self.Input_LineEdit3, self.Calculate_Button)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -255,15 +195,12 @@ class Ui_MainWindow(object):
         self.Function_ComboBox.setItemText(4, _translate("MainWindow", "Размещение с повторениями"))
         self.Function_ComboBox.setItemText(5, _translate("MainWindow", "Перестановка с повторениями"))
         self.Function_ComboBox.setItemText(6, _translate("MainWindow", "Задача №1"))
-        self.Function_ComboBox.setItemText(7, _translate("MainWindow", "Задача №5"))
 
         self.Input_Label0.setText(_translate("MainWindow", "Input_Label0"))
         self.Input_Label1.setText(_translate("MainWindow", "Input_Label1"))
         self.Input_Label2.setText(_translate("MainWindow", "Input_Label2"))
         self.Input_Label3.setText(_translate("MainWindow", "Input_Label3"))
         self.Input_Label3.setText(_translate("MainWindow", "Input_Label4"))
-        self.Scroll_Label1.setText(_translate("MainWindow", "Scroll_Label1"))
-        self.Scroll_Label2.setText(_translate("MainWindow", "Scroll_Label2"))
 
         self.Result_Label.setText(_translate("MainWindow", "Результат:"))
         self.Formula_Label.setText(_translate("MainWindow", "Формула:"))

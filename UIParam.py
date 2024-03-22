@@ -9,16 +9,6 @@ class UiParam:
     lineEditVisibility2 = False
     lineEditVisibility3 = False
     lineEditVisibility4 = False
-    labelListText1 = ""
-    labelListText2 = ""
-    listVisibility1 = False
-    listVisibility2 = False
-    numOfLineEditListenerList1 = 0
-    numOfLineEditListenerList2 = 0
-    nameElementList1 = ""
-    nameElementList2 = ""
-    maxLengthOfList1 = 100
-    maxLengthOfList2 = 100
     pictureName = ""
     needNum1 = False
     needNum2 = False

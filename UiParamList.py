@@ -10,7 +10,6 @@ def paramList():
     paramList.append(initializationParam5())
     paramList.append(initializationParam6())
     paramList.append(initializationParam7())
-    paramList.append(initializationParam8())
     return paramList
 def initializationParam1():
     param = UiParam()
@@ -87,10 +86,10 @@ def initializationParam7():
     param.labelText0 = ("Условие задачи: \nВ партии, состоящей из k изделий, имеется l дефектных.\n"
                         "Из партии выбирается для контроля r изделий."
                         "\nНайти вероятность того, что из них S изделий будут дефектными.")
-    param.labelText1 = "k:"
-    param.labelText2 = "l:"
-    param.labelText3 = "r:"
-    param.labelText4 = "S:"
+    param.labelText1 = "Всего изделий k:"
+    param.labelText2 = "Дефектных изделий l:"
+    param.labelText3 = "Кол-во изделий для контроля r:"
+    param.labelText4 = "Кол-во дефектных изделий среди выбранных для контроля S:"
     param.lineEditVisibility0 = True
     param.lineEditVisibility1 = True
     param.lineEditVisibility2 = True
@@ -101,30 +100,4 @@ def initializationParam7():
     param.needNum3 = True
     param.needNum4 = True
     param.function = lambda values: probabilityFunctions.task1(values.num1, values.num2, values.num3, values.num4)
-    return param
-
-def initializationParam8():
-    param = UiParam()
-    param.labelText0 = ("Условие задачи:\nВ ящике имеется k ТЭЗ, из них k1 элементов 1-го типа, ...,\n"
-                        "ki элементов i-го типа, ..., km элементов m типа; . Из ящика выбирают наугал n ТЭЗ.\n"
-                        "Найти вероятность того, что среди них будет n1 ТЭЗ 1-го типа, ...,\n"
-                        "ni ТЭЗ i-го типа, ..., nm ТЭЗ m-го типа")
-    param.labelText1 = "Количество чисел M:"
-    param.lineEditVisibility0 = True
-    param.lineEditVisibility1 = True
-    param.lineEditVisibility2 = True
-    param.labelListText1 = "Числа k:"
-    param.labelListText2 = "Числа n:"
-    param.labelText2 = "Количество чисел выбранных наугад n:"
-    param.nameElementList1 = "k"
-    param.nameElementList2 = "n"
-    param.listVisibility1 = True
-    param.numOfLineEditListenerList1 = 1
-    param.listVisibility2 = True
-    param.numOfLineEditListenerList2 = 1
-    param.needList1 = True
-    param.needList2 = True
-    param.needNum1 = True
-    param.needNum2 = True
-    param.function = lambda values: probabilityFunctions.task5(values.list1, values.list2, values.num2, values.num1)
     return param
