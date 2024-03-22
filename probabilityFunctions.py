@@ -39,14 +39,3 @@ def task1(k, l, r, S):
         value = (combWithoutRep(l, S) * combWithoutRep(k-l, r-S))/(combWithoutRep(k, r))
         return value
     return -1
-
-def task5(km, nm, n, m):
-    res = ""
-    all_elements = sum(km)
-    for i in range(m):
-        p = km[i]/all_elements
-        q = 1 - p
-        P = combWithoutRep(n, nm[i]) * (p**nm[i]) * (q**(n-nm[i]))
-        res += "P" + str(i) + " = " + str(P) + "; "
-
-    return res

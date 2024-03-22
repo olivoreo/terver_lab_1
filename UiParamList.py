@@ -99,5 +99,6 @@ def initializationParam7():
     param.needNum2 = True
     param.needNum3 = True
     param.needNum4 = True
+    param.pictureName = "Задача1"
     param.function = lambda values: probabilityFunctions.task1(values.num1, values.num2, values.num3, values.num4)
     return param
