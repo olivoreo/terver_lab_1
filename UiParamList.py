@@ -47,7 +47,7 @@ def initializationParam3():
 def initializationParam4():
     param = UiParam()
     param.labelText1 = "N:"
-    param.labelText2 = "M:"
+    param.labelText2 = "K:"
     param.lineEditVisibility1 = True
     param.lineEditVisibility2 = True
     param.needNum1 = True
