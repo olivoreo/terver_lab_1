@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
 
         self.Function_ComboBox = QtWidgets.QComboBox(parent=self.centralwidget)
         self.Function_ComboBox.setObjectName("Function_ComboBox")
-        for i in range(7):
+        for i in range(4):
             self.Function_ComboBox.addItem("")
         self.verticalLayoutMain.addWidget(self.Function_ComboBox)
 
@@ -165,17 +165,10 @@ class Ui_MainWindow(object):
                 values.num3 = getIntFromLineEdit(self.Input_LineEdit3)
             if param.needNum4:
                 values.num4 = getIntFromLineEdit(self.Input_LineEdit4)
-            if param.needList1:
-                values.list1 = self.myListWidgetClass1.getList()
-            if param.needList2:
-                values.list2 = self.myListWidgetClass2.getList()
             res = param.function(values)
-            if int(res) < 0:
-                text = "Некорректный ввод!"
-            else:
-                text = "Результат: " + str(res)
+            text = "Результат: " + str(res)
         except:
-            text = "Невозможно посчитать значение"
+            text = "Произошла критическая ошибка"
         self.Result_Label.setText(text)
 
     def setTabOder(self, MainWindow):
@@ -188,13 +181,10 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Lab_1 Тютюнов, Лукьяненко, Букин"))
 
-        self.Function_ComboBox.setItemText(0, _translate("MainWindow", "Перестановка без повторений"))
-        self.Function_ComboBox.setItemText(1, _translate("MainWindow", "Сочетание без повторений"))
-        self.Function_ComboBox.setItemText(2, _translate("MainWindow", "Размещение без повторений"))
-        self.Function_ComboBox.setItemText(3, _translate("MainWindow", "Сочетание с повторениями"))
-        self.Function_ComboBox.setItemText(4, _translate("MainWindow", "Размещение с повторениями"))
-        self.Function_ComboBox.setItemText(5, _translate("MainWindow", "Перестановка с повторениями"))
-        self.Function_ComboBox.setItemText(6, _translate("MainWindow", "Задача №1"))
+        self.Function_ComboBox.setItemText(0, _translate("MainWindow", "Сочетание без повторений"))
+        self.Function_ComboBox.setItemText(1, _translate("MainWindow", "Сочетание с повторениями"))
+        self.Function_ComboBox.setItemText(2, _translate("MainWindow", "Размещение с повторениями"))
+        self.Function_ComboBox.setItemText(3, _translate("MainWindow", "Задача №1"))
 
         self.Input_Label0.setText(_translate("MainWindow", "Input_Label0"))
         self.Input_Label1.setText(_translate("MainWindow", "Input_Label1"))

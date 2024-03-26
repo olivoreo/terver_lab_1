@@ -14,6 +14,4 @@ class UiParam:
     needNum2 = False
     needNum3 = False
     needNum4 = False
-    needList1 = False
-    needList2 = False
     function = None

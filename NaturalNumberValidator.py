@@ -4,7 +4,7 @@ from PyQt6.QtGui import QRegularExpressionValidator
 class NaturalNumberValidator(QRegularExpressionValidator):
     def __init__(self, parent=None):
         super().__init__(parent)
-        reg_exp = QRegularExpression("[1-9]\\d*")  # Регулярное выражение для натуральных чисел
+        reg_exp = QRegularExpression("[1-9]|[1-9][0-9]|[1-4][0-9][0-9]|500")  # Регулярное выражение для натуральных чисел
         self.setRegularExpression(reg_exp)
 
 

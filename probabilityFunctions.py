@@ -9,7 +9,7 @@ def combWithoutRep(n, m):
     if (n >= m):
         return int(factorial(n) // (factorial(m) * factorial(n - m)))
     else:
-        return -1
+        return "Ошибка! Число N должно быть больше или равно M!"
 
 
 def placeWithoutRep(n, m):
@@ -38,4 +38,4 @@ def task1(k, l, r, S):
     if (k >= l >= r >= S):
         value = (combWithoutRep(l, S) * combWithoutRep(k-l, r-S))/(combWithoutRep(k, r))
         return value
-    return -1
+    return "Ошибка! Данные противоречат условию задачи! Значения должны соответствовать неравенству: k >= l >= r >= S"
